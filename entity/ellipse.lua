@@ -5,8 +5,8 @@ local Shape = require 'entity.shape'
 
 local Ellipse = Class{
     __includes = Shape,
-    type = 'line',
-    name = 'line',
+    type = 'ellipse',
+    name = 'ellipse',
 }
 
 function Ellipse:init()
@@ -23,8 +23,7 @@ end
 function Ellipse:draw()
     Shape.draw(self)
 
-    local p = self.properties
-    love.graphics.ellipse(p.mode, 0, 0, p.radius:unpack())
+    Shape._modeDraw(self, 0, 0, self.properties.radius:unpack())
 end
 
 return Ellipse

@@ -15,15 +15,33 @@ function Shape:init()
 end
 
 function Shape:add(opt)
-    self.pos = opt.pos or vector(0,0)
-    self.scale = opt.scale or vector(1,1)
-    self.rot = opt.rot or 0
+    self.name = opt.name or self.name
+    
+    self.pos = (opt.pos and opt.pos:clone()) or self.pos
+    self.scale = (opt.scale and opt.scale:clone()) or self.scale
+    self.rot = opt.rot or self.rot
     
     for k,v in pairs(opt) do
         local p = k:gsub("^%l", string.upper)
         if love.graphics['set' .. p] then self.properties.graphics['set' .. p] = v end
     end
-    self.properties.mode = opt.mode or 'fill'
+
+    self.properties.mode = opt.mode
+    self.properties.fill = opt.fill
+    self.properties.line = opt.line
+end
+
+function Shape._modeDraw(o, ...)
+    local mode, fill, line = o.properties.mode, o.properties.fill, o.properties.line
+    if mode then love.graphics[o.type](mode,...) return end
+    if fill then
+        love.graphics.setColor(fill)
+        love.graphics[o.type]('fill',...)
+    end
+    if line then
+        love.graphics.setColor(line)
+        love.graphics[o.type]('line',...)
+    end
 end
 
 function Shape:draw()

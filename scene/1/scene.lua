@@ -28,17 +28,27 @@ function Scene1:init()
     }    
     for i,v in ipairs(ys) do
         opt.pos = vector(0, h/2 + v*h/2)
-        local l = self:addEntity(Line, opt)
-        self.root:addChild(l)
+        local e = self:addEntity(Line, opt)
+        self.root:addChild(e)
     end
 
     local opt = {
         pos = vector(0.67*w, 0.25*h),
         radius = vector(0.1*h, 0.1*h),
         color = Color.palette.yellow,
+        mode = 'fill'
     }
-    local l = self:addEntity(Ellipse, opt)
-    self.root:addChild(l)
+    e1 = self:addEntity(Ellipse, opt)
+    self.root:addChild(e1)
+    opt.pos = vector(100,0)
+    opt.scale = vector(0.5, 0.5)
+    local e2 = self:addEntity(Ellipse, opt)
+    e1:addChild(e2)
+end
+
+function Scene1:update(dt)
+    Scene.update(self, dt)
+    e1.rot = e1.rot + dt
 end
 
 function Scene1:draw()
