@@ -1,0 +1,1 @@
+return {images = {}, sounds = {} , fonts = {}}
