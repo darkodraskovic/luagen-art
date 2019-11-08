@@ -37,12 +37,10 @@ function Scene3:init()
     r0 = self:addEntity(Slider, opt)
     r0.pos = vector(100,100)
     self.root:addChild(r0)
-    
-    t0 = self:addEntity(
-        Text,
-        {size = r0.size, hAlign = 'center',
-         color = Color.palette.yellow})
-    -- t0.pos.y = 40
+
+    local txtOpt = {size = r0.size, hAlign = 'center',
+         graphics = { setColor = Color.palette.yellow}}
+    t0 = self:addEntity(Text, txtOpt)
     r0:addChild(t0)
     r0:setValue(0)
 end

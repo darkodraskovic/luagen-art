@@ -23,8 +23,10 @@ function Scene1:init()
 
     local opt = {
         points = {0, 0, w, 0},
-        color = Color.palette.yellow,
         pos = vector(0,h/2),
+        graphics = {
+            setColor = Color.palette.yellow,    
+        }
     }    
     for i,v in ipairs(ys) do
         opt.pos = vector(0, h/2 + v*h/2)
@@ -34,8 +36,10 @@ function Scene1:init()
 
     local opt = {
         pos = vector(0.67*w, 0.25*h),
-        radius = vector(0.1*h, 0.1*h),
-        color = Color.palette.yellow,
+        width = 0.2*h,
+        graphics = {
+            setColor = Color.palette.yellow,    
+        },
         mode = 'fill'
     }
     local e1 = self:addEntity(Ellipse, opt)

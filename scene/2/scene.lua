@@ -24,7 +24,9 @@ function Scene2:init()
 
     local opt = {
         points = {-w/2, 0, 1.5*w, 0},
-        color = Color.palette.yellow,
+        graphics = {
+            setColor = Color.palette.yellow,
+        },
         pos = vector(0,h/2),
     }
     lines = self:addEntity()
@@ -35,21 +37,23 @@ function Scene2:init()
         lines:addChild(e)
     end
     lines.size = vector(love.graphics.getDimensions())
-    lines.offset = vector(0.5, 0.5)
-    lines.pos = lines.size:permul(lines.offset) + vector(0, h*0.2)
+    lines.offset = lines.size/2
+    lines.pos = lines.offset + vector(0, h*0.2)
     lines.rot = math.pi/8
 
     local opt = {
         pos = vector(0.67*w, 0.3*h),
-        radius = vector(0.1*h, 0.1*h),
-        color = Color.palette.yellow,
-        mode = 'fill'
+        width = 0.2*h,
+        mode = 'fill',
+        graphics = {
+            setColor = Color.palette.yellow,
+        }
     }
     e1 = self:addEntity(Ellipse, opt)
     self.root:addChild(e1)
     opt.pos = vector(100,0)
     opt.scale = vector(0.5, 0.5)
-    opt.color = Color.palette.red
+    opt.mode = nil
     opt.fill = Color.palette.red
     local e2 = self:addEntity(Ellipse, opt)
     e1:addChild(e2)
