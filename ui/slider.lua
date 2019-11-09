@@ -1,5 +1,6 @@
 local Class = require 'lib.hump.class'
 local vector = require 'lib.hump.vector'
+local shapes = require 'lib.HC.shapes'
 
 local Entity = require 'lib.core.entity'
 local Collider = require 'lib.component.collider'
@@ -21,6 +22,8 @@ end
 local clamp = function(n, low, high) return math.min(math.max(n, low), high) end
 
 function Slider:add(opt)
+    Entity.add(self, opt)
+    
     local opt = Class.clone(opt)
     
     self.properties.min = opt.min or 0
@@ -35,8 +38,11 @@ function Slider:add(opt)
         opt.handle.width, opt.handle.height = opt.handle.height, opt.handle.width
     end
     self.size = vector(w,h)
-    self:addComponent(Collider, {shape = self.scene.collider:rectangle(0,0, self.size:unpack())})
+    
+    local shape = shapes.newPolygonShape(0,0, w,0, w,h, 0,h)
+    self:addComponent(Collider, {shape = shape, offset = self.size/2})
 
+    opt.bar.parent = self; opt.handle.parent = self
     local bar = self.scene:addEntity(Rectangle, opt.bar)
     local handle = self.scene:addEntity(Rectangle, opt.handle)
 
@@ -45,12 +51,10 @@ function Slider:add(opt)
         [x] = {0, self.size[x] - handle.size[x]},
         [y] = {handle.pos[y], handle.pos[y]}
     }
-
-    self:addChild(bar)
-    self:addChild(handle)
     
     if opt.interactive then
-        handle:addComponent(Collider, {shape = handle:getShape(), register = true, updates = true})        
+        local shape, offset = handle:getShape()
+        handle:addComponent(Collider, {shape = shape, offset = offset})
         handle:addComponent(Draggable, {limit = Class.clone(self.properties.limit)})
     end
 end

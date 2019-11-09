@@ -3,7 +3,9 @@ local vector = require 'lib.hump.vector'
 
 local inspect = require 'inspect'
 local Scene = require 'lib.core.scene'
+local Collider = require 'lib.component.collider'
 local Drawable = require 'lib.component.drawable'
+local Draggable = require 'lib.component.draggable'
 
 local Color = require 'util.color'
 local Rectangle = require 'graphics.rectangle'
@@ -24,7 +26,7 @@ function Scene3:init()
     self.signals:register('keypressed', function(key) self:keypressed(key) end)
 
     local opt = {
-        min = -12, max = 12, axis = 'y', interactive = true,
+        min = -12, max = 12, axis = 'y', interactive = true, parent = self.root,
     }
     opt.bar = {
         fill = Color.palette.gray_dark,
@@ -35,13 +37,11 @@ function Scene3:init()
         width = 16, height = 32,
     }
     r0 = self:addEntity(Slider, opt)
-    r0.pos = vector(100,100)
-    self.root:addChild(r0)
+    r0.pos = vector(300,300)
 
-    local txtOpt = {size = r0.size, hAlign = 'center',
+    local txtOpt = {size = r0.size, hAlign = 'center', parent = r0,
          graphics = { setColor = Color.palette.yellow}}
     t0 = self:addEntity(Text, txtOpt)
-    r0:addChild(t0)
     r0:setValue(0)
 end
 

@@ -22,7 +22,7 @@ function Scene1:init()
     for i = 0, 1, 1/10 do table.insert(ys, math.pow(i, 2)) end
 
     local opt = {
-        points = {0, 0, w, 0},
+        points = {0, 0, w, 0}, parent = self.root,
         pos = vector(0,h/2),
         graphics = {
             setColor = Color.palette.yellow,    
@@ -31,19 +31,14 @@ function Scene1:init()
     for i,v in ipairs(ys) do
         opt.pos = vector(0, h/2 + v*h/2)
         local e = self:addEntity(Line, opt)
-        self.root:addChild(e)
     end
 
     local opt = {
-        pos = vector(0.67*w, 0.25*h),
-        width = 0.2*h,
-        graphics = {
-            setColor = Color.palette.yellow,    
-        },
-        mode = 'fill'
+        pos = vector(0.67*w, 0.25*h), offset = vector(0.1*h, 0.1*h),
+        width = 0.2*h, parent = self.root,
+        fill = Color.palette.yellow,
     }
     local e1 = self:addEntity(Ellipse, opt)
-    self.root:addChild(e1)
 end
 
 function Scene1:update(dt)
