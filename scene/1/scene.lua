@@ -5,8 +5,8 @@ local inspect = require 'inspect'
 local Scene = require 'lib.core.scene'
 
 local Color = require 'util.color'
-local Line = require 'graphics.line'
-local Ellipse = require 'graphics.ellipse'
+local Line = require 'extension.graphics.line'
+local Ellipse = require 'extension.graphics.ellipse'
 
 local Scene1 = Class{
     __includes = Scene,
@@ -22,7 +22,7 @@ function Scene1:init()
     for i = 0, 1, 1/10 do table.insert(ys, math.pow(i, 2)) end
 
     local opt = {
-        points = {0, 0, w, 0}, parent = self.root,
+        points = {0, 0, w, 0}, parent = self,
         pos = vector(0,h/2),
         graphics = {
             setColor = Color.palette.yellow,    
@@ -35,7 +35,7 @@ function Scene1:init()
 
     local opt = {
         pos = vector(0.67*w, 0.25*h), offset = vector(0.1*h, 0.1*h),
-        width = 0.2*h, parent = self.root,
+        width = 0.2*h, parent = self,
         fill = Color.palette.yellow,
     }
     local e1 = self:addEntity(Ellipse, opt)

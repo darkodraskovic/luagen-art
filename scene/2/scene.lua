@@ -6,8 +6,8 @@ local Scene = require 'lib.core.scene'
 local Drawable = require 'lib.component.drawable'
 
 local Color = require 'util.color'
-local Line = require 'graphics.line'
-local Ellipse = require 'graphics.ellipse'
+local Line = require 'extension.graphics.line'
+local Ellipse = require 'extension.graphics.ellipse'
 
 local Scene2 = Class{
     __includes = Scene,
@@ -22,7 +22,7 @@ function Scene2:init()
     local ys = {}
     for i = 0, 1, 1/10 do table.insert(ys, math.pow(i, 2)) end
 
-    lines = self:addEntity(); self.root:addChild(lines)
+    lines = self:addEntity(); self:addChild(lines)
     local opt = {
         points = {-w/2, 0, 1.5*w, 0}, parent = lines,
         graphics = {
@@ -41,7 +41,7 @@ function Scene2:init()
 
     local width = 0.2*h
     local opt = {
-        pos = vector(0.67*w, 0.3*h), parent = self.root,
+        pos = vector(0.67*w, 0.3*h), parent = self,
         width = width, offset = vector(width/3, width/3),
         fill = Color.palette.yellow,
     }

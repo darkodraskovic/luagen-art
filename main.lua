@@ -13,7 +13,7 @@ local cnt = 0
 function love.load()
     resources.fonts['Vera'] = love.graphics.newFont('res/font/Vera.ttf', 16)
     
-    scene = Scene3()
+    scene = Scene2()
 end
 
 function love.update(dt)
