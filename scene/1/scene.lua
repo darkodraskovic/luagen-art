@@ -17,7 +17,7 @@ local w,h = love.graphics.getDimensions()
 
 function Scene1:init()
     Scene.init(self)
-
+    
     local ys = {}
     for i = 0, 1, 1/10 do table.insert(ys, math.pow(i, 2)) end
 

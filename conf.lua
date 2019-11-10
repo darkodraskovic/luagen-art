@@ -8,6 +8,6 @@ function love.conf(t)
     t.window.fullscreen = false
     t.window.msaa = 2
     
-    t.modules.joystick = false
+    -- t.modules.joystick = false
     t.modules.physics = false
 end

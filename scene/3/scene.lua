@@ -21,9 +21,13 @@ local Scene3 = Class{
 }
 
 local w,h = love.graphics.getDimensions()
+local joystick
 
 function Scene3:init()
     Scene.init(self)
+    
+    joystick = love.joystick.getJoysticks()[1]
+
     self.signals:register('keypressed', function(key) self:keypressed(key) end)
 
     local opt = {
@@ -64,14 +68,44 @@ function Scene3:init()
         graphics = { setColor = Color.palette.yellow}}
     t1 = self:addEntity(Text, txtOpt)
     cb1:register('checked', function(e, checked) t1.properties.text = tostring(e.checked) end)
-    
+end
+
+function Scene3:mousepressed(x, y, button)
+    self:emit('mousepressed', x, y, button)
+end
+
+function Scene3:mousereleased(x, y, button)
+    self:emit('mousereleased', x, y, button)
 end
 
 function Scene3:keypressed(key)
     -- print("keypressed", key)
 end
 
+-- function Scene3:joystickpressed(joystick,button)
+--     print(button)
+-- end
+
+-- function Scene3:gamepadpressed(joystick,button)
+--     print(button)
+-- end
+
+-- function Scene3:joystickaxis( joystick, axis, value )
+--     print(axis, value)
+-- end
+
+-- function Scene3:gamepadaxis(joystick, axis, value)
+--     print(axis, value)
+-- end
+
+
+
+
 function Scene3:update(dt)
+    -- anyDown = Joystick:isDown( buttonN, ... )
+    direction = joystick:getAxis(2)
+    r0:setValue(r0:getValue() + direction * dt * 30)
+
     Scene.update(self, dt)
 end
 
