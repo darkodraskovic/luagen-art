@@ -15,18 +15,13 @@ local Text = require 'extension.graphics.text'
 local Slider = require 'extension.ui.slider'
 local Checkbox = require 'extension.ui.checkbox'
 
-local Scene3 = Class{
-    __includes = Scene,
-    name = 'scene_3',
-}
+local Scene3 = Scene()
 
 local w,h = love.graphics.getDimensions()
 local joystick
 
 function Scene3:init()
-    Scene.init(self)
-    
-    joystick = love.joystick.getJoysticks()[1]
+    -- joystick = love.joystick.getJoysticks()[1]
 
     self.signals:register('keypressed', function(key) self:keypressed(key) end)
 
@@ -51,7 +46,7 @@ function Scene3:init()
     r0:setValue(0)
 
     opt = {
-        parent = self, pos = vector(100,100),
+        parent = r0, pos = vector(100,100),
         outer = {
             fill = Color.palette.gray_dark,
             width = 32, height = 32,            
@@ -70,17 +65,14 @@ function Scene3:init()
     cb1:register('checked', function(e, checked) t1.properties.text = tostring(e.checked) end)
 end
 
-function Scene3:mousepressed(x, y, button)
-    self:emit('mousepressed', x, y, button)
+function Scene3:mousepressed(...)
+    self:emit('mousepressed', ...)
 end
 
-function Scene3:mousereleased(x, y, button)
-    self:emit('mousereleased', x, y, button)
+function Scene3:mousereleased(...)
+    self:emit('mousereleased', ...)
 end
 
-function Scene3:keypressed(key)
-    -- print("keypressed", key)
-end
 
 -- function Scene3:joystickpressed(joystick,button)
 --     print(button)
@@ -98,13 +90,10 @@ end
 --     print(axis, value)
 -- end
 
-
-
-
 function Scene3:update(dt)
     -- anyDown = Joystick:isDown( buttonN, ... )
-    direction = joystick:getAxis(2)
-    r0:setValue(r0:getValue() + direction * dt * 30)
+    -- direction = joystick:getAxis(2)
+    -- r0:setValue(r0:getValue() + direction * dt * 30)
 
     Scene.update(self, dt)
 end

@@ -9,16 +9,11 @@ local Color = require 'util.color'
 local Line = require 'extension.graphics.line'
 local Ellipse = require 'extension.graphics.ellipse'
 
-local Scene2 = Class{
-    __includes = Scene,
-    name = 'scene_2',
-}
+local scene2 = Scene()
 
 local w,h = love.graphics.getDimensions()
 
-function Scene2:init()
-    Scene.init(self)
-    
+function scene2:init()
     local ys = {}
     for i = 0, 1, 1/10 do table.insert(ys, math.pow(i, 2)) end
 
@@ -47,22 +42,22 @@ function Scene2:init()
     }
     e1 = self:addEntity(Ellipse, opt)
     opt.pos = vector(100,0)
-    opt.scale = vector(0.5, 0.5)
+    opt.scl = vector(0.5, 0.5)
     opt.mode = nil
     opt.fill = Color.palette.red
     opt.parent = e1
     local e2 = self:addEntity(Ellipse, opt)
 end
 
-function Scene2:update(dt)
+function scene2:update(dt)
     Scene.update(self, dt)
     e1.rot = e1.rot + dt
 end
 
-function Scene2:draw()
+function scene2:draw()
     love.graphics.clear(Color.palette.gray_gb)
 
     Scene.draw(self)
 end
 
-return Scene2
+return scene2

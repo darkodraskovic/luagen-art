@@ -5,19 +5,18 @@ local Gamestate = require 'lib.hump.gamestate'
 
 local resources = require 'resources'
 
-local Scene1 = require 'scene.1.scene'
-local Scene2 = require 'scene.2.scene'
-local Scene3 = require 'scene.3.scene'
+local scene1 = require 'scene.1.scene'
+local scene2 = require 'scene.2.scene'
+local scene3 = require 'scene.3.scene'
 
 local scene
 local cnt = 0
-
 
 function love.load()
     resources.fonts['Vera'] = love.graphics.newFont('res/font/Vera.ttf', 16)
     
     Gamestate.registerEvents()
-    Gamestate.switch(Scene3)
+    Gamestate.switch(scene3)
 end
 
 -- function love.keypressed(key)
