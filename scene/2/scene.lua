@@ -41,7 +41,7 @@ function scene2:init()
         fill = Color.palette.yellow,
     }
     e1 = self:addEntity(Ellipse, opt)
-    opt.pos = vector(100,0)
+    opt.pos = vector(width/2,0)
     opt.scl = vector(0.5, 0.5)
     opt.mode = nil
     opt.fill = Color.palette.red
