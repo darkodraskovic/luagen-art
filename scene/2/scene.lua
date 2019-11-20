@@ -3,7 +3,6 @@ local vector = require 'lib.hump.vector'
 
 local inspect = require 'inspect'
 local Scene = require 'lib.core.scene'
-local Drawable = require 'lib.component.drawable'
 
 local Color = require 'util.color'
 local Line = require 'extension.graphics.line'

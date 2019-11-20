@@ -16,7 +16,7 @@ function love.load()
     resources.fonts['Vera'] = love.graphics.newFont('res/font/Vera.ttf', 16)
     
     Gamestate.registerEvents()
-    Gamestate.switch(scene2)
+    Gamestate.switch(scene3)
 end
 
 -- function love.keypressed(key)

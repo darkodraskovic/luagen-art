@@ -4,7 +4,6 @@ local vector = require 'lib.hump.vector'
 local inspect = require 'inspect'
 local Scene = require 'lib.core.scene'
 local Collider = require 'lib.component.collider'
-local Drawable = require 'lib.component.drawable'
 local Draggable = require 'lib.component.draggable'
 
 local Color = require 'util.color'
@@ -57,12 +56,13 @@ function Scene3:init()
         }
     }
     cb1 = self:addEntity(Checkbox, opt)
-    local txtOpt = {
+    local txtOpt = { 
         size = cb1.size, hAlign = 'center', parent = cb1, vAlign = 'bellow',
         text = tostring(cb1.checked),
         graphics = { setColor = Color.palette.yellow}}
     t1 = self:addEntity(Text, txtOpt)
     cb1:register('checked', function(e, checked) t1.properties.text = tostring(e.checked) end)
+    cb1.rot = math.pi/5
 end
 
 function Scene3:mousepressed(...)
