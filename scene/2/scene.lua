@@ -42,7 +42,6 @@ function scene2:init()
     e1 = self:addEntity(Ellipse, opt)
     opt.pos = vector(width/2,0)
     opt.scl = vector(0.5, 0.5)
-    opt.mode = nil
     opt.fill = Color.palette.red
     opt.parent = e1
     local e2 = self:addEntity(Ellipse, opt)

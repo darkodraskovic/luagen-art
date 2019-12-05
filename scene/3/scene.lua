@@ -48,7 +48,7 @@ function Scene3:init()
         parent = r0, pos = vector(100,100),
         outer = {
             fill = Color.palette.gray_dark,
-            width = 32, height = 32,            
+            width = 32, height = 32, 
         },
         inner  = {
             fill = Color.palette.gray,
@@ -57,11 +57,11 @@ function Scene3:init()
     }
     cb1 = self:addEntity(Checkbox, opt)
     local txtOpt = { 
-        size = cb1.size, hAlign = 'center', parent = cb1, vAlign = 'bellow',
+        width = 32, height = 32, hAlign = 'center', parent = cb1, vAlign = 'bellow',
         text = tostring(cb1.checked),
         graphics = { setColor = Color.palette.yellow}}
     t1 = self:addEntity(Text, txtOpt)
-    cb1:register('checked', function(e, checked) t1.properties.text = tostring(e.checked) end)
+    cb1:register('mousepressed', function(e) t1.properties.text = tostring(e.checked) end)
     cb1.rot = math.pi/5
 end
 
